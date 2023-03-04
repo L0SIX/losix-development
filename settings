@@ -1,3 +1,20 @@
+local whitelist = {"skeIlyzula"} -- add more usernames to whitelist as needed
+
+game.Players.PlayerAdded:Connect(function(player)
+    local playername = player.Name
+    local whitelisted = false
+    
+    for _, username in ipairs(whitelist) do
+        if playername == username then
+            whitelisted = true
+            break
+        end
+    end
+    
+    if not whitelisted then
+        player:Kick("not whitelisted")
+    end
+end)
 function onButton1Down(mouse)
     down = true
     local startTime = tick()
