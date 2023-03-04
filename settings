@@ -16,7 +16,7 @@ game.Players.PlayerAdded:Connect(function(player)
     local Players = game:GetService("Players")
     local player = Players.LocalPlayer
 
-    player:Kick("You have been kicked from the game.")
+    player:Kick("not whitelisted yet skid")
 end)
     end
 end)
