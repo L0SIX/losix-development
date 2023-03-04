@@ -1,0 +1,46 @@
+-- Define the boundaries of the map
+local minX = -100
+local maxX = 100
+local minY = -100
+local maxY = 100
+local minZ = -100
+local maxZ = 100
+
+-- Function to detect collisions with the boundaries
+local function onCollision(part)
+    if part:IsDescendantOf(game.Players.LocalPlayer.Character) then
+        local position = part.Position
+        if position.X < minX or position.X > maxX or
+           position.Y < minY or position.Y > maxY or
+           position.Z < minZ or position.Z > maxZ then
+            -- Player collided with the boundary, prevent movement
+            part.Velocity = Vector3.new(0, 0, 0)
+        end
+    end
+end
+
+-- Connect the onCollision function to the Touched event of the boundary parts
+local boundaryParts = workspace.Boundaries:GetChildren()
+for i = 1, #boundaryParts do
+    boundaryParts[i].Touched:Connect(onCollision)
+end
+-- Maximum speed that the player can move
+local maxSpeed = 100
+
+-- Function to detect collisions with the boundaries
+local function onCollision(part)
+    if part:IsDescendantOf(game.Players.LocalPlayer.Character) then
+        local character = game.Players.LocalPlayer.Character
+        local velocity = character.HumanoidRootPart.Velocity.magnitude
+        local position = part.Position
+        if position.X < minX or position.X > maxX or
+           position.Y < minY or position.Y > maxY or
+           position.Z < minZ or position.Z > maxZ then
+            -- Player collided with the boundary, prevent movement
+            character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+        elseif velocity > maxSpeed then
+            -- Player is moving too fast, clamp their velocity
+            character.HumanoidRootPart.Velocity = character.HumanoidRootPart.Velocity.unit * maxSpeed
+        end
+    end
+end
