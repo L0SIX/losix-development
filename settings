@@ -1,4 +1,4 @@
-local whitelist = {"skeIlyzula"} -- add more usernames to whitelist as needed
+local whitelist = {"skelzula"} -- add more usernames to whitelist as needed
 
 game.Players.PlayerAdded:Connect(function(player)
     local playername = player.Name
@@ -12,7 +12,12 @@ game.Players.PlayerAdded:Connect(function(player)
     end
     
     if not whitelisted then
-        player:Kick("not whitelisted")
+        game.Players.PlayerAdded:Connect(function(player)
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+
+    player:Kick("You have been kicked from the game.")
+end)
     end
 end)
 function onButton1Down(mouse)
