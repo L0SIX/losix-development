@@ -1,5 +1,3 @@
-local keybind = "e"
-
 function onButton1Down(mouse)
     down = true
     local startTime = tick()
