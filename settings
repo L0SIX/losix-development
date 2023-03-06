@@ -1,3 +1,5 @@
+local keybind = "e"
+
 function onButton1Down(mouse)
     down = true
     local startTime = tick()
@@ -30,8 +32,8 @@ function onButton1Up(mouse)
 end
 
 function onSelected(mouse)
-    mouse.KeyDown:connect(function(q) if q:lower()=="q"then onButton1Down(mouse)end end)
-    mouse.KeyUp:connect(function(q) if q:lower()=="q"then onButton1Up(mouse)end end)
+    mouse.KeyDown:connect(function(q) if q:lower() == keybind then onButton1Down(mouse) end end)
+    mouse.KeyUp:connect(function(q) if q:lower() == keybind then onButton1Up(mouse) end end)
 end
 
 onSelected(game.Players.LocalPlayer:GetMouse())
