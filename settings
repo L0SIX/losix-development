@@ -1,37 +1,37 @@
 function onButton1Down(mouse)
-    down = true
-    local startTime = tick()
-    local elapsedTime = 0
-    while down do
-        if not down then break end
-        local char = plr.Character
-        
-        -- Calculate the new look vector
-        local lookVec = char.HumanoidRootPart.CFrame.lookVector
-        if elapsedTime < lookTime then
-            -- If the elapsed time is less than the look time, look at a random angle
-            local randomAngle = math.rad(math.random(0, 360))
-            local rotation = CFrame.Angles(0, randomAngle, 0)
-            lookVec = rotation * lookVec
-        end
-        
-        -- Calculate the new speed
-        local newSpeed = math.min(speed, (speed/accelerationTime) * elapsedTime)
-        local swayMagnitude = math.sin(math.random(1,10)) * 0.2 -- The magnitude of the left-to-right movement
-        char.HumanoidRootPart.Velocity = (lookVec.unit * newSpeed) + (char.HumanoidRootPart.CFrame.rightVector * swayMagnitude)
-        
-        elapsedTime = tick() - startTime
-        wait()
-    end
+   down = true
+   local startTime = tick()
+   local elapsedTime = 0
+   while down do
+      if not down then break end
+      local char = plr.Character
+
+      -- Calculate the new look vector
+      local lookVec = char.HumanoidRootPart.CFrame.lookVector
+      if elapsedTime < lookTime then
+         -- If the elapsed time is less than the look time, look at a random angle
+         local randomAngle = math.rad(math.random(0, 360))
+         local rotation = CFrame.Angles(0, randomAngle, 0)
+         lookVec = rotation * lookVec
+      end
+
+      -- Calculate the new speed
+      local newSpeed = math.min(speed, (speed/accelerationTime) * elapsedTime)
+      local swayMagnitude = math.sin(math.random(1,10)) * 0.2 -- The magnitude of the left-to-right movement
+      char.HumanoidRootPart.Velocity = (lookVec.unit * newSpeed) + (char.HumanoidRootPart.CFrame.rightVector * swayMagnitude)
+
+      elapsedTime = tick() - startTime
+      wait()
+   end
 end
 
 function onButton1Up(mouse)
-    down = false
+   down = false
 end
 
 function onSelected(mouse)
-    mouse.KeyDown:connect(function(q) if q:lower() == keybind then onButton1Down(mouse) end end)
-    mouse.KeyUp:connect(function(q) if q:lower() == keybind then onButton1Up(mouse) end end)
+   mouse.KeyDown:connect(function(q) if q:lower()=="q"then onButton1Down(mouse)end end)
+   mouse.KeyUp:connect(function(q) if q:lower()=="q"then onButton1Up(mouse)end end)
 end
 
 onSelected(game.Players.LocalPlayer:GetMouse())
