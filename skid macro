@@ -236,6 +236,25 @@ if game.PlaceId == 2788229376 then
             Stop()
             Greet:Play()
             wait(1.5)
+            -- Wait for player to load
+-- Get the player's backpack
+local backpack = game.Players.LocalPlayer:WaitForChild("Backpack")
+
+-- Get the second item in the backpack
+local item = backpack:GetChildren()[2]
+
+-- Check if the item exists
+if item then
+    -- Equip the item
+    backpack:Equip(item)
+
+    -- Wait for 0.60 seconds
+    wait(0.60)
+
+    -- Unequip the item
+    backpack:Unequip()
+end
+
             plr = game:GetService('Players').LocalPlayer
 down = false
 speed = 185 -- The speed at which the player moves
